@@ -45,10 +45,12 @@ function changeOptions(value) {
   margin: 0;
   padding: 0;
   display: flex;
+  flex-wrap: wrap;
 }
 .left {
   flex: 1;
   overflow: auto;
+  min-width: 60%;
 }
 .right {
   height: 100%;
