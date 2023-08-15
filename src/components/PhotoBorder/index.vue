@@ -18,21 +18,20 @@
 <script setup>
 import { watch, reactive, onMounted } from "vue";
 import { config, getInitBorder } from "./config";
-import { debounce } from "@/tools/index.js";
+import { throttle } from "@/tools/index.js";
 
 const emit = defineEmits(["changeOptions"]);
 
 const border = reactive(getInitBorder());
 
-const debounceChangeOptions = debounce(
-  () => emit("changeOptions", border),
-  500
-);
+const throttleChangeOptions = throttle(() => {
+  emit("changeOptions", { ...border });
+}, 150);
 
-watch(border, debounceChangeOptions);
+watch(border, throttleChangeOptions);
 
 onMounted(() => {
-  emit("changeOptions", border);
+  emit("changeOptions", { ...border });
 });
 </script>
 

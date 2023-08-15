@@ -25,7 +25,11 @@ function changeOptions(value) {
     </div>
     <div class="right">
       <div class="top">
-        <FileHandle @changeFile="changeFile" />
+        <FileHandle
+          @changeFile="changeFile"
+          :options="options"
+          :fileUrl="fileUrl"
+        />
       </div>
       <div class="bottom">
         <PhotoBorder @changeOptions="changeOptions" />

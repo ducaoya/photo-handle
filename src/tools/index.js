@@ -34,6 +34,20 @@ export function debounce(fn, wait) {
   };
 }
 
+// 定义一个节流函数
+export function throttle(fn, delay) {
+  let timer;
+  return function () {
+    if (!timer) {
+      fn.apply(this, arguments);
+      timer = setTimeout(() => {
+        clearTimeout(timer);
+        timer = null;
+      }, delay);
+    }
+  };
+}
+
 export async function render(fileUrl, options) {
   const img = await fileToImage(fileUrl);
   const canvas = document.createElement("canvas");
