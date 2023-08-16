@@ -37,26 +37,32 @@ function upload() {
 }
 
 async function download() {
-  loading.value = true;
   try {
     const { options, fileUrl } = props;
-
     if (options && fileUrl) {
+      loading.value = true;
       const canvas = await render(fileUrl, options);
-      console.log("<=== canvas ===>", canvas);
+      console.log("<=== canvas ===>",typeof canvas);
       if (canvas) {
-        const url = canvas.toDataURL();
+        canvas.toBlob((blob)=>{
+          const url = URL.createObjectURL(blob)
+          console.log("<=== url ===>",url)
 
-        const a = document.createElement("a");
-        a.download = fileName.value || "img.png";
-        a.href = url;
-        a.click();
+          const a = document.createElement("a");
+          a.download = fileName.value || "img.png";
+          a.href = url;
+
+          loading.value = false;
+          a.click();
+        });
+      }else{
+        loading.value = false;
       }
     }
   } catch (error) {
     console.log("<=== error ===>", error);
+    loading.value = false;
   }
-  loading.value = false;
 }
 </script>
 
