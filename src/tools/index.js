@@ -48,9 +48,10 @@ export function throttle(fn, delay) {
   };
 }
 
+const canvas = document.createElement("canvas");
+
 export async function render(fileUrl, options) {
   const img = await fileToImage(fileUrl);
-  const canvas = document.createElement("canvas");
   const ctx = canvas.getContext("2d");
   if (ctx) {
     const top = getPercentage(options.top);
@@ -64,6 +65,7 @@ export async function render(fileUrl, options) {
     canvas.height = (top + bottom) * base + img.height;
 
     ctx.fillStyle = "white";
+
     ctx.fillRect(0, 0, canvas.width, canvas.height);
     ctx.drawImage(img, left * base, top * base);
 
