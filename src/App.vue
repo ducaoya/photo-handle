@@ -51,6 +51,7 @@ function changeOptions(value) {
   flex: 1;
   overflow: auto;
   min-width: 60%;
+  max-height: 100%;
 }
 .right {
   height: 100%;
